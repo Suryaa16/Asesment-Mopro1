@@ -7,4 +7,26 @@
     <string name="menu_about">About</string>
     <string name="menu_share">Share App</string>
     <string name="share_text">Check out FitCalc - a simple fitness calculator app!</string>
+    <!-- BMI Screen -->
+    <string name="bmi_title">BMI Calculator</string>
+    <string name="bmi_weight">Weight</string>
+    <string name="bmi_height">Height</string>
+    <string name="bmi_weight_hint_metric">Weight (kg)</string>
+    <string name="bmi_height_hint_metric">Height (cm)</string>
+    <string name="bmi_weight_hint_imperial">Weight (lbs)</string>
+    <string name="bmi_height_hint_imperial">Height (inches)</string>
+    <string name="bmi_metric">Metric (kg/cm)</string>
+    <string name="bmi_imperial">Imperial (lbs/in)</string>
+    <string name="bmi_calculate">Calculate BMI</string>
+    <string name="bmi_result">Your BMI</string>
+    <string name="bmi_category">Category</string>
+    <string name="bmi_underweight">Underweight</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_overweight">Overweight</string>
+    <string name="bmi_obese">Obese</string>
+    <string name="error_empty_field">This field cannot be empty</string>
+    <string name="error_invalid_number">Please enter a valid number</string>
+    <string name="error_invalid_weight">Weight must be greater than 0</string>
+    <string name="error_invalid_height">Height must be greater than 0</string>
+
 </resources>

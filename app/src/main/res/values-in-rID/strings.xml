@@ -8,4 +8,25 @@
     <string name="menu_about">Tentang</string>
     <string name="menu_share">Bagikan App</string>
     <string name="share_text">Coba FitCalc - aplikasi kalkulator kebugaran sederhana!</string>
+    <!-- BMI Screen -->
+    <string name="bmi_title">Kalkulator BMI</string>
+    <string name="bmi_weight">Berat Badan</string>
+    <string name="bmi_height">Tinggi Badan</string>
+    <string name="bmi_weight_hint_metric">Berat (kg)</string>
+    <string name="bmi_height_hint_metric">Tinggi (cm)</string>
+    <string name="bmi_weight_hint_imperial">Berat (lbs)</string>
+    <string name="bmi_height_hint_imperial">Tinggi (inci)</string>
+    <string name="bmi_metric">Metrik (kg/cm)</string>
+    <string name="bmi_imperial">Imperial (lbs/in)</string>
+    <string name="bmi_calculate">Hitung BMI</string>
+    <string name="bmi_result">BMI Anda</string>
+    <string name="bmi_category">Kategori</string>
+    <string name="bmi_underweight">Kurus</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_overweight">Gemuk</string>
+    <string name="bmi_obese">Obesitas</string>
+    <string name="error_empty_field">Kolom ini tidak boleh kosong</string>
+    <string name="error_invalid_number">Masukkan angka yang valid</string>
+    <string name="error_invalid_weight">Berat harus lebih dari 0</string>
+    <string name="error_invalid_height">Tinggi harus lebih dari 0</string>
 </resources>

@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Asesment MOBPRO1</string>
+    <string name="app_name">FitCall</string>
+    <string name="home_tagline">Your Personal Fitness Calculator</string>
+    <string name="home_subtitle">Track your BMI and daily calorie needs easily</string>
+    <string name="btn_bmi">BMI Calculator</string>
+    <string name="btn_calorie">Calorie Calculator</string>
+    <string name="menu_about">About</string>
+    <string name="menu_share">Share App</string>
+    <string name="share_text">Check out FitCalc - a simple fitness calculator app!</string>
 </resources>

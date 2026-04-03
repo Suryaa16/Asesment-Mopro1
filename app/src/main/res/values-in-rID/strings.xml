@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">FitCall</string>
+    <string name="home_tagline">Kalkulator Kebugaran Pribadi Anda</string>
+    <string name="home_subtitle">Hitung BMI dan kebutuhan kalori harian dengan mudah</string>
+    <string name="btn_bmi">Kalkulator BMI</string>
+    <string name="btn_calorie">Kalkulator Kalori</string>
+    <string name="menu_about">Tentang</string>
+    <string name="menu_share">Bagikan App</string>
+    <string name="share_text">Coba FitCalc - aplikasi kalkulator kebugaran sederhana!</string>
+</resources>

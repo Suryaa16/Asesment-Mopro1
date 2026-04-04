@@ -29,4 +29,22 @@
     <string name="error_invalid_weight">Weight must be greater than 0</string>
     <string name="error_invalid_height">Height must be greater than 0</string>
 
+    <!-- Calorie Screen -->
+    <string name="calorie_title">Calorie Calculator</string>
+    <string name="calorie_age">Age (years)</string>
+    <string name="calorie_weight_kg">Weight (kg)</string>
+    <string name="calorie_height_cm">Height (cm)</string>
+    <string name="calorie_gender">Gender</string>
+    <string name="calorie_male">Male</string>
+    <string name="calorie_female">Female</string>
+    <string name="calorie_activity">Activity Level</string>
+    <string name="calorie_sedentary">Sedentary (little/no exercise)</string>
+    <string name="calorie_light">Light (1-3 days/week)</string>
+    <string name="calorie_moderate">Moderate (3-5 days/week)</string>
+    <string name="calorie_active">Active (6-7 days/week)</string>
+    <string name="calorie_very_active">Very Active (hard exercise)</string>
+    <string name="calorie_calculate">Calculate Calories</string>
+    <string name="calorie_result">Daily Calorie Needs</string>
+    <string name="calorie_kcal">kcal/day</string>
+    <string name="error_invalid_age">Age must be between 1 and 120</string>
 </resources>

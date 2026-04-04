@@ -29,4 +29,23 @@
     <string name="error_invalid_number">Masukkan angka yang valid</string>
     <string name="error_invalid_weight">Berat harus lebih dari 0</string>
     <string name="error_invalid_height">Tinggi harus lebih dari 0</string>
+
+    <!-- Calorie Screen -->
+    <string name="calorie_title">Kalkulator Kalori</string>
+    <string name="calorie_age">Usia (tahun)</string>
+    <string name="calorie_weight_kg">Berat Badan (kg)</string>
+    <string name="calorie_height_cm">Tinggi Badan (cm)</string>
+    <string name="calorie_gender">Jenis Kelamin</string>
+    <string name="calorie_male">Laki-laki</string>
+    <string name="calorie_female">Perempuan</string>
+    <string name="calorie_activity">Tingkat Aktivitas</string>
+    <string name="calorie_sedentary">Tidak Aktif (jarang olahraga)</string>
+    <string name="calorie_light">Ringan (1-3 hari/minggu)</string>
+    <string name="calorie_moderate">Sedang (3-5 hari/minggu)</string>
+    <string name="calorie_active">Aktif (6-7 hari/minggu)</string>
+    <string name="calorie_very_active">Sangat Aktif (olahraga berat)</string>
+    <string name="calorie_calculate">Hitung Kalori</string>
+    <string name="calorie_result">Kebutuhan Kalori Harian</string>
+    <string name="calorie_kcal">kkal/hari</string>
+    <string name="error_invalid_age">Usia harus antara 1 dan 120</string>
 </resources>

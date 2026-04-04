@@ -48,4 +48,15 @@
     <string name="calorie_result">Kebutuhan Kalori Harian</string>
     <string name="calorie_kcal">kkal/hari</string>
     <string name="error_invalid_age">Usia harus antara 1 dan 120</string>
+
+    <!-- About Screen -->
+    <string name="about_title">Tentang</string>
+    <string name="about_app_name">FitCalc</string>
+    <string name="about_version">Versi 1.0.0</string>
+    <string name="about_description">FitCalc adalah aplikasi kalkulator kebugaran sederhana yang membantu Anda memantau BMI dan kebutuhan kalori harian. Tetap sehat dan bugar!</string>
+    <string name="about_developer">Pengembang</string>
+    <string name="about_developer_name">Surya</string>
+    <string name="about_open_website">Buka Website</string>
+    <string name="about_website_url">https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight</string>
+    <string name="about_share">Bagikan App</string>
 </resources>

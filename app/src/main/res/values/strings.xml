@@ -47,4 +47,15 @@
     <string name="calorie_result">Daily Calorie Needs</string>
     <string name="calorie_kcal">kcal/day</string>
     <string name="error_invalid_age">Age must be between 1 and 120</string>
+
+    <!-- About Screen -->
+    <string name="about_title">About</string>
+    <string name="about_app_name">FitCalc</string>
+    <string name="about_version">Version 1.0.0</string>
+    <string name="about_description">FitCalc is a simple fitness calculator app that helps you track your BMI and daily calorie needs. Stay healthy and fit!</string>
+    <string name="about_developer">Developer</string>
+    <string name="about_developer_name">Surya</string>
+    <string name="about_open_website">Open Website</string>
+    <string name="about_website_url">https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight</string>
+    <string name="about_share">Share App</string>
 </resources>

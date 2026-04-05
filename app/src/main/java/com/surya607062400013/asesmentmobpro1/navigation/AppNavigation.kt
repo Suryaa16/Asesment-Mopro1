@@ -8,11 +8,13 @@ import com.surya607062400013.asesmentmobpro1.ui.screens.HomeScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.AboutScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.BmiScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.CalorieScreen
+import com.surya607062400013.asesmentmobpro1.ui.screens.ProteinScreen
 
 object Routes {
     const val HOME = "home"
     const val BMI = "bmi"
     const val CALORIE = "calorie"
+    const val PROTEIN = "protein"
     const val ABOUT = "about"
 }
 
@@ -28,6 +30,7 @@ fun AppNavigation() {
             HomeScreen(
                 onNavigateToBmi = { navController.navigate(Routes.BMI) },
                 onNavigateToCalorie = { navController.navigate(Routes.CALORIE) },
+                onNavigateToProtein = { navController.navigate(Routes.PROTEIN) },
                 onNavigateToAbout = { navController.navigate(Routes.ABOUT)}
             )
         }
@@ -40,6 +43,12 @@ fun AppNavigation() {
 
         composable(Routes.CALORIE) {
             CalorieScreen(
+                onNavigateUp = { navController.navigateUp() }
+            )
+        }
+
+        composable(Routes.PROTEIN) {
+            ProteinScreen(
                 onNavigateUp = { navController.navigateUp() }
             )
         }

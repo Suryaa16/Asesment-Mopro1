@@ -1,7 +1,6 @@
 package com.surya607062400013.asesmentmobpro1.ui.screens
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.rememberScrollState
@@ -101,24 +100,6 @@ fun AboutScreen(onNavigateUp: () -> Unit) {
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
-
-            //Tombol buka web
-            Button(
-                onClick = {
-                    val url = context.getString(R.string.about_website_url)
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    context.startActivity(intent)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.about_open_website),
-                    fontSize = 16.sp
-                )
-            }
 
             //Tombol share
             OutlinedButton(

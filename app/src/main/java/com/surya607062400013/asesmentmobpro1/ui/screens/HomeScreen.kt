@@ -46,6 +46,7 @@ import com.surya607062400013.asesmentmobpro1.R
 fun HomeScreen(
     onNavigateToBmi: () -> Unit,
     onNavigateToCalorie: () -> Unit,
+    onNavigateToProtein: () -> Unit,
     onNavigateToAbout: () -> Unit
 ) {
     val context = LocalContext.current
@@ -104,7 +105,7 @@ fun HomeScreen(
         ) {
             //gambar Banner
             Image(
-                painter = painterResource(id = R.drawable.banner),
+                painter = painterResource(id = R.drawable.banner1),
                 contentDescription = "Banner",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -155,6 +156,21 @@ fun HomeScreen(
             ) {
                 Text(
                     text = stringResource(R.string.btn_calorie),
+                    fontSize = 16.sp
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            //Tombol protein
+            OutlinedButton(
+                onClick = onNavigateToProtein,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.btn_protein),
                     fontSize = 16.sp
                 )
             }

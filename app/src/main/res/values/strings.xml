@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">FitCall</string>
+
+    <!--Home Screen-->
     <string name="home_tagline">Your Personal Fitness Calculator</string>
     <string name="home_subtitle">Track your BMI and daily calorie needs easily</string>
     <string name="btn_bmi">BMI Calculator</string>
     <string name="btn_calorie">Calorie Calculator</string>
     <string name="menu_about">About</string>
     <string name="menu_share">Share App</string>
-    <string name="share_text">Check out FitCalc - a simple fitness calculator app!</string>
-    <!-- BMI Screen -->
+    <string name="share_text">Check out FitCall - a simple fitness calculator app!</string>
+
+    <!--BMI Screen-->
     <string name="bmi_title">BMI Calculator</string>
     <string name="bmi_weight">Weight</string>
     <string name="bmi_height">Height</string>
@@ -29,7 +32,7 @@
     <string name="error_invalid_weight">Weight must be greater than 0</string>
     <string name="error_invalid_height">Height must be greater than 0</string>
 
-    <!-- Calorie Screen -->
+    <!--Kalori Screen-->
     <string name="calorie_title">Calorie Calculator</string>
     <string name="calorie_age">Age (years)</string>
     <string name="calorie_weight_kg">Weight (kg)</string>
@@ -48,14 +51,27 @@
     <string name="calorie_kcal">kcal/day</string>
     <string name="error_invalid_age">Age must be between 1 and 120</string>
 
-    <!-- About Screen -->
+    <!--About Screen-->
     <string name="about_title">About</string>
-    <string name="about_app_name">FitCalc</string>
+    <string name="about_app_name">FitCall</string>
     <string name="about_version">Version 1.0.0</string>
-    <string name="about_description">FitCalc is a simple fitness calculator app that helps you track your BMI and daily calorie needs. Stay healthy and fit!</string>
+    <string name="about_description">FitCall is a simple fitness calculator app that helps you track your BMI, daily calorie needs, and daily protein needs. Good for Health, Bad for Education!</string>
     <string name="about_developer">Developer</string>
     <string name="about_developer_name">Surya</string>
-    <string name="about_open_website">Open Website</string>
-    <string name="about_website_url">https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight</string>
     <string name="about_share">Share App</string>
+
+    <!-- Protein Screen -->
+    <string name="btn_protein">Protein Calculator</string>
+    <string name="protein_title">Protein Calculator</string>
+    <string name="protein_weight">Weight (kg)</string>
+    <string name="protein_goal">Fitness Goal</string>
+    <string name="protein_sedentary">Sedentary (no exercise)</string>
+    <string name="protein_fitness">General Fitness</string>
+    <string name="protein_muscle">Muscle Building</string>
+    <string name="protein_athlete">Athlete</string>
+    <string name="protein_calculate">Calculate Protein</string>
+    <string name="protein_result">Daily Protein Needs</string>
+    <string name="protein_gram">grams/day</string>
+    <string name="protein_min">Min</string>
+    <string name="protein_max">Max</string>
 </resources>

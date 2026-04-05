@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FitCall</string>
+
+    <!--Home Screen-->
     <string name="home_tagline">Kalkulator Kebugaran Pribadi Anda</string>
     <string name="home_subtitle">Hitung BMI dan kebutuhan kalori harian dengan mudah</string>
     <string name="btn_bmi">Kalkulator BMI</string>
     <string name="btn_calorie">Kalkulator Kalori</string>
     <string name="menu_about">Tentang</string>
     <string name="menu_share">Bagikan App</string>
-    <string name="share_text">Coba FitCalc - aplikasi kalkulator kebugaran sederhana!</string>
-    <!-- BMI Screen -->
+    <string name="share_text">Coba FitCall - aplikasi kalkulator kebugaran sederhana!</string>
+
+    <!--BMI Screen-->
     <string name="bmi_title">Kalkulator BMI</string>
     <string name="bmi_weight">Berat Badan</string>
     <string name="bmi_height">Tinggi Badan</string>
@@ -30,7 +33,7 @@
     <string name="error_invalid_weight">Berat harus lebih dari 0</string>
     <string name="error_invalid_height">Tinggi harus lebih dari 0</string>
 
-    <!-- Calorie Screen -->
+    <!--Calorie Screen-->
     <string name="calorie_title">Kalkulator Kalori</string>
     <string name="calorie_age">Usia (tahun)</string>
     <string name="calorie_weight_kg">Berat Badan (kg)</string>
@@ -49,14 +52,27 @@
     <string name="calorie_kcal">kkal/hari</string>
     <string name="error_invalid_age">Usia harus antara 1 dan 120</string>
 
-    <!-- About Screen -->
+    <!--About Screen-->
     <string name="about_title">Tentang</string>
-    <string name="about_app_name">FitCalc</string>
+    <string name="about_app_name">FitCall</string>
     <string name="about_version">Versi 1.0.0</string>
-    <string name="about_description">FitCalc adalah aplikasi kalkulator kebugaran sederhana yang membantu Anda memantau BMI dan kebutuhan kalori harian. Tetap sehat dan bugar!</string>
+    <string name="about_description">FitCall adalah aplikasi kalkulator kebugaran sederhana yang membantu Anda memantau BMI,kebutuhan kalori harian, dan kebutuhan protein harian. Tetap sehat dan bugar!</string>
     <string name="about_developer">Pengembang</string>
     <string name="about_developer_name">Surya</string>
-    <string name="about_open_website">Buka Website</string>
-    <string name="about_website_url">https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight</string>
     <string name="about_share">Bagikan App</string>
+
+    <!-- Protein Screen -->
+    <string name="btn_protein">Kalkulator Protein</string>
+    <string name="protein_title">Kalkulator Protein</string>
+    <string name="protein_weight">Berat Badan (kg)</string>
+    <string name="protein_goal">Tujuan Kebugaran</string>
+    <string name="protein_sedentary">Tidak Aktif (tanpa olahraga)</string>
+    <string name="protein_fitness">Kebugaran Umum</string>
+    <string name="protein_muscle">Pembentukan Otot</string>
+    <string name="protein_athlete">Atlet</string>
+    <string name="protein_calculate">Hitung Protein</string>
+    <string name="protein_result">Kebutuhan Protein Harian</string>
+    <string name="protein_gram">gram/hari</string>
+    <string name="protein_min">Min</string>
+    <string name="protein_max">Maks</string>
 </resources>

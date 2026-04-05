@@ -58,6 +58,10 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
     var bmiCategory by remember { mutableStateOf("") }
 
     val scrollState = rememberScrollState()
+    val strUnderweight = stringResource(R.string.bmi_underweight)
+    val strNormal = stringResource(R.string.bmi_normal)
+    val strOverweight = stringResource(R.string.bmi_overweight)
+    val strObese = stringResource(R.string.bmi_obese)
 
     Scaffold(
         topBar = {
@@ -103,6 +107,7 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
                 RadioButton(
                     selected = !isMetric,
                     onClick = {
+                        isMetric = false
                         weight = ""
                         height = ""
                         bmiResult = null
@@ -198,10 +203,10 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
 
                         //Kategori
                         bmiCategory = when {
-                            bmi < 18.5 -> "UnderWeight"
-                            bmi < 25.0 -> "Normal"
-                            bmi < 30.0 -> "OverWeight"
-                            else -> "Obese"
+                            bmi < 18.5 -> strUnderweight
+                            bmi < 25.0 -> strNormal
+                            bmi < 30.0 -> strOverweight
+                            else -> strObese
                         }
                     }
                 },
@@ -238,7 +243,7 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = String.format("%.1f", bmi),
+                            text = String.format(java.util.Locale.getDefault(),"%.1f", bmi),
                             fontSize = 48.sp,
                             fontWeight = FontWeight.Bold
                         )

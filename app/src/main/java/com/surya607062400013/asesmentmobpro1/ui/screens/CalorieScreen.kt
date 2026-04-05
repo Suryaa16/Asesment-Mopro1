@@ -27,7 +27,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
     var weight by remember { mutableStateOf("") }
     var height by remember { mutableStateOf("") }
     var isMale by remember { mutableStateOf(true) }
-    var selectedActivity by remember { mutableStateOf(0) }
+    var selectedActivity by remember { mutableIntStateOf(0) }
 
     //state error
     var ageError by remember { mutableStateOf("") }
@@ -248,7 +248,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = String.format("%.0f", calories),
+                            text = String.format(java.util.Locale.getDefault(),"%.0f", calories),
                             fontSize = 48.sp,
                             fontWeight = FontWeight.Bold
                         )

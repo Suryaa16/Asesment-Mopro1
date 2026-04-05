@@ -4,7 +4,7 @@
 
     <!--Home Screen-->
     <string name="home_tagline">Kalkulator Kebugaran Pribadi Anda</string>
-    <string name="home_subtitle">Hitung BMI dan kebutuhan kalori harian dengan mudah</string>
+    <string name="home_subtitle">Hitung BMI, kebutuhan kalori harian, dan kebutuhan protein dengan mudah</string>
     <string name="btn_bmi">Kalkulator BMI</string>
     <string name="btn_calorie">Kalkulator Kalori</string>
     <string name="menu_about">Tentang</string>

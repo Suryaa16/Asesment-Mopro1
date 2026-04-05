@@ -3,7 +3,7 @@
 
     <!--Home Screen-->
     <string name="home_tagline">Your Personal Fitness Calculator</string>
-    <string name="home_subtitle">Track your BMI and daily calorie needs easily</string>
+    <string name="home_subtitle">Track your BMI, daily calorie, and daily Protein nedds easily</string>
     <string name="btn_bmi">BMI Calculator</string>
     <string name="btn_calorie">Calorie Calculator</string>
     <string name="menu_about">About</string>

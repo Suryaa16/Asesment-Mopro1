@@ -37,7 +37,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
 
     val scrollState = rememberScrollState()
 
-    //Penentuan label & komsumsi harian protein (min, max) per kg berat badan
+    //Tujuan asupan protein (min, max) per kg berat badan
     val goalLabels = listOf(
         stringResource(R.string.protein_sedentary),
         stringResource(R.string.protein_fitness),

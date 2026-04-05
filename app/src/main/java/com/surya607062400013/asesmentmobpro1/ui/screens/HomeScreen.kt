@@ -147,7 +147,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             //Tombol Kalori
-            OutlinedButton(
+            Button(
                 onClick = onNavigateToCalorie,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -162,7 +162,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             //Tombol protein
-            OutlinedButton(
+            Button(
                 onClick = onNavigateToProtein,
                 modifier = Modifier
                     .fillMaxWidth()

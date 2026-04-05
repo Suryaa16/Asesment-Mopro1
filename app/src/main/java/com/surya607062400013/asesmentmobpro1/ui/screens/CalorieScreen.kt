@@ -214,7 +214,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
                         val w = weight.toDouble()
                         val h = height.toDouble()
 
-                        //Haris benedict formula
+                        //Memakai rumus Revised Harris-Benedict Equation
                         val bmr = if (isMale) {
                             88.362 + (13.397 * w) + (4.799 * h) - (5.677 * a)
                         } else {

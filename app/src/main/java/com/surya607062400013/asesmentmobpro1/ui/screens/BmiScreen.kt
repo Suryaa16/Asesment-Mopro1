@@ -60,6 +60,7 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
     var bmiResult by remember { mutableStateOf<Double?>(null) }
     var bmiCategory by remember { mutableStateOf("") }
 
+    //Mengambil string dari strings.xml agar bisa multibahasa
     val scrollState = rememberScrollState()
     val strUnderweight = stringResource(R.string.bmi_underweight)
     val strNormal = stringResource(R.string.bmi_normal)
@@ -196,12 +197,12 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
                         val w = weight.toDouble()
                         val h = height.toDouble()
 
-                        //Hitung BMI
+                        //Hitung BMI = berat badan : tinggi badan x tinggi badan
                         val bmi = if (isMetric) {
                             val hMeters = h / 100.0
                             w / (hMeters * hMeters)
                         } else {
-                            703 * w / (h * h)
+                            703 * w / (h * h) //untuk imperial 703 x berat badan : (tinggi badan)²
                         }
                         bmiResult = bmi
 

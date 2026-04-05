@@ -12,11 +12,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.content.Intent
 import com.surya607062400013.asesmentmobpro1.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,6 +49,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
         stringResource(R.string.calorie_very_active),
     )
     val activityMultipliers = listOf(1.2, 1.375, 1.55, 1.55, 1.9)
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -257,6 +260,25 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold
                         )
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        //Tombol share hasil
+                        OutlinedButton(
+                            onClick = {
+                                val shareText = context.getString(
+                                    R.string.share_calorie_result,
+                                    calories
+                                )
+                                val intent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_TEXT, shareText)
+                                }
+                                context.startActivity(Intent.createChooser(intent, "Share via"))
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(stringResource(R.string.menu_share))
+                        }
                     }
                 }
             }

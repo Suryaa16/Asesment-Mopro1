@@ -31,6 +31,7 @@
     <string name="error_invalid_number">Please enter a valid number</string>
     <string name="error_invalid_weight">Weight must be greater than 0</string>
     <string name="error_invalid_height">Height must be greater than 0</string>
+    <string name="share_bmi_result">My BMI Result from FitCall!\nBMI: %.1f\nCategory: %s\n\nCalculate yours at FitCall App!</string>
 
     <!--Kalori Screen-->
     <string name="calorie_title">Calorie Calculator</string>
@@ -50,6 +51,7 @@
     <string name="calorie_result">Daily Calorie Needs</string>
     <string name="calorie_kcal">kcal/day</string>
     <string name="error_invalid_age">Age must be between 1 and 120</string>
+    <string name="share_calorie_result">My Daily Calorie Needs from FitCall!\nCalories: %.0f kcal/day\n\nCalculate yours at FitCall App!</string>
 
     <!--About Screen-->
     <string name="about_title">About</string>
@@ -74,4 +76,5 @@
     <string name="protein_gram">grams/day</string>
     <string name="protein_min">Min</string>
     <string name="protein_max">Max</string>
+    <string name="share_protein_result">My Daily Protein Needs from FitCall!\nProtein: %.0f - %.0f grams/day\n\nCalculate yours at FitCall App!</string>
 </resources>

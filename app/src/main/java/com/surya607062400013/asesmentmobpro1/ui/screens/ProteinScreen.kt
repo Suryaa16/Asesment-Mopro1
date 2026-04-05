@@ -1,5 +1,6 @@
 package com.surya607062400013.asesmentmobpro1.ui.screens
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -11,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,33 +24,34 @@ import com.surya607062400013.asesmentmobpro1.R
 @Composable
 fun ProteinScreen(onNavigateUp: () -> Unit) {
 
-    // State input
+    //State input
     var weight by remember { mutableStateOf("") }
     var selectedGoal by remember { mutableIntStateOf(0) }
 
-    // State error
+    //State error
     var weightError by remember { mutableStateOf("") }
 
-    // State hasil
+    //State hasil
     var proteinMin by remember { mutableStateOf<Double?>(null) }
     var proteinMax by remember { mutableStateOf<Double?>(null) }
 
     val scrollState = rememberScrollState()
 
-    // Goal labels & multiplier (min, max) per kg berat badan
+    //Penentuan label & komsumsi harian protein (min, max) per kg berat badan
     val goalLabels = listOf(
         stringResource(R.string.protein_sedentary),
         stringResource(R.string.protein_fitness),
         stringResource(R.string.protein_muscle),
         stringResource(R.string.protein_athlete)
     )
-    // Pair(min per kg, max per kg)
+    //min per kg, max per kg
     val goalMultipliers = listOf(
-        Pair(0.8, 1.0),   // Sedentary
-        Pair(1.2, 1.4),   // General Fitness
-        Pair(1.6, 2.0),   // Muscle Building
-        Pair(2.0, 2.4)    // Athlete
+        Pair(0.8, 1.0),   // tidak olahraga
+        Pair(1.2, 1.4),   // kebugaran umum
+        Pair(1.6, 2.0),   // Pembentukan otot
+        Pair(2.0, 2.4)    // Atlit
     )
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -74,7 +77,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
-            // ── Input Berat ──
+            // Inputan
             OutlinedTextField(
                 value = weight,
                 onValueChange = {
@@ -91,7 +94,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                 singleLine = true
             )
 
-            // ── Pilih Tujuan (RadioButton) ──
+            //Pilihan tujuan
             Text(
                 text = stringResource(R.string.protein_goal),
                 fontWeight = FontWeight.SemiBold,
@@ -110,7 +113,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                 }
             }
 
-            // ── Tombol Hitung ──
+            //Hitung
             Button(
                 onClick = {
                     var valid = true
@@ -140,7 +143,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                 Text(stringResource(R.string.protein_calculate), fontSize = 16.sp)
             }
 
-            // ── Tampilkan Hasil ──
+            //Tampilkan hasil
             if (proteinMin != null && proteinMax != null) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Card(
@@ -174,7 +177,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
 
                         HorizontalDivider(color = Color.White.copy(alpha = 0.5f))
 
-                        // Detail min max
+                        //Detail min max
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
@@ -201,6 +204,26 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                                     fontWeight = FontWeight.Bold
                                 )
                             }
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        //Tombol share hasil
+                        OutlinedButton(
+                            onClick = {
+                                val shareText = context.getString(
+                                    R.string.share_protein_result,
+                                    proteinMin,
+                                    proteinMax
+                                )
+                                val intent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_TEXT, shareText)
+                                }
+                                context.startActivity(Intent.createChooser(intent, "Share via"))
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(stringResource(R.string.menu_share))
                         }
                     }
                 }

@@ -32,6 +32,7 @@
     <string name="error_invalid_number">Masukkan angka yang valid</string>
     <string name="error_invalid_weight">Berat harus lebih dari 0</string>
     <string name="error_invalid_height">Tinggi harus lebih dari 0</string>
+    <string name="share_bmi_result">Hasil BMI saya dari FitCall!\nBMI: %.1f\nKategori: %s\n\nHitung punyamu di aplikasi FitCall!</string>
 
     <!--Calorie Screen-->
     <string name="calorie_title">Kalkulator Kalori</string>
@@ -51,6 +52,7 @@
     <string name="calorie_result">Kebutuhan Kalori Harian</string>
     <string name="calorie_kcal">kkal/hari</string>
     <string name="error_invalid_age">Usia harus antara 1 dan 120</string>
+    <string name="share_calorie_result">Kebutuhan Kalori Harian saya dari FitCall!\nKalori: %.0f kkal/hari\n\nHitung punyamu di aplikasi FitCall!</string>
 
     <!--About Screen-->
     <string name="about_title">Tentang</string>
@@ -75,4 +77,5 @@
     <string name="protein_gram">gram/hari</string>
     <string name="protein_min">Min</string>
     <string name="protein_max">Maks</string>
+    <string name="share_protein_result">Kebutuhan Protein Harian saya dari FitCall!\nProtein: %.0f - %.0f gram/hari\n\nHitung punyamu di aplikasi FitCall!</string>
 </resources>

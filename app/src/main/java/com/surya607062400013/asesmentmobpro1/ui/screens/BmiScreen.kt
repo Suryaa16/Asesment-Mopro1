@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -39,6 +40,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import android.content.Intent
 import com.surya607062400013.asesmentmobpro1.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,6 +65,7 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
     val strNormal = stringResource(R.string.bmi_normal)
     val strOverweight = stringResource(R.string.bmi_overweight)
     val strObese = stringResource(R.string.bmi_obese)
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -252,6 +256,26 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold
                         )
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        //Tombol share hasil
+                        OutlinedButton(
+                            onClick = {
+                                val shareText = context.getString(
+                                    R.string.share_bmi_result,
+                                    bmi,
+                                    bmiCategory
+                                )
+                                val intent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_TEXT, shareText)
+                                }
+                                context.startActivity(Intent.createChooser(intent, "Share via"))
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(stringResource(R.string.menu_share))
+                        }
                     }
                 }
             }

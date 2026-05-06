@@ -23,6 +23,7 @@ import androidx.compose.ui.text.intl.Locale
 import com.surya607062400013.asesmentmobpro1.R
 import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
 import androidx.compose.ui.platform.LocalLocale
+import com.surya607062400013.asesmentmobpro1.data.local.entity.HistoryEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -225,6 +226,16 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                             447.593 + (9.247 * w) + (3.098 * h) - (4.330 * a)
                         }
                         calorieResult = bmr * activityMultipliers[selectedActivity]
+
+                        //Simpan ke database
+                        historyViewModel.insert(
+                            HistoryEntity(
+                                type = "Calorie",
+                                result = "${String.format(Locale.current.platformLocale, "%.0f", calorieResult)} kcal/day",
+                                detail = "Age: $a, Weight: ${w}kg, Height: ${h}cm, ${if (isMale) "Male" else "Female"}",
+                                date = System.currentTimeMillis()
+                            )
+                        )
                     }
                 },
                 modifier = Modifier

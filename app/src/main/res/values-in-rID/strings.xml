@@ -78,4 +78,24 @@
     <string name="protein_min">Min</string>
     <string name="protein_max">Maks</string>
     <string name="share_protein_result">Kebutuhan Protein Harian saya dari FitCall!\nProtein: %.0f - %.0f gram/hari\n\nHitung punyamu di aplikasi FitCall!</string>
+
+    <!-- History Screen -->
+    <string name="history_title">Riwayat</string>
+    <string name="history_empty">Belum ada riwayat</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_bmi">BMI</string>
+    <string name="filter_calorie">Kalori</string>
+    <string name="filter_protein">Protein</string>
+    <string name="recycle_bin">Tempat Sampah</string>
+    <string name="delete">Hapus</string>
+    <string name="delete_confirm">Yakin ingin menghapus item ini?</string>
+    <string name="delete_confirm_desc">Item akan dipindahkan ke Tempat Sampah</string>
+    <string name="cancel">Batal</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="detail">Detail</string>
+    <string name="edit">Edit</string>
+    <string name="restore">Pulihkan</string>
+    <string name="delete_permanent">Hapus Permanen</string>
+    <string name="delete_permanent_desc">Item akan dihapus selamanya dan tidak dapat dipulihkan</string>
+    <string name="recycle_bin_empty">Tempat Sampah kosong</string>
 </resources>

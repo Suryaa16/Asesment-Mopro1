@@ -46,6 +46,7 @@ import androidx.compose.ui.text.intl.Locale
 import com.surya607062400013.asesmentmobpro1.R
 import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
 import androidx.compose.ui.platform.LocalLocale
+import com.surya607062400013.asesmentmobpro1.data.local.entity.HistoryEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -217,6 +218,16 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                             bmi < 30.0 -> strOverweight
                             else -> strObese
                         }
+
+                        //Simpan ke database
+                        historyViewModel.insert(
+                            HistoryEntity(
+                                type = "BMI",
+                                result = "BMI: ${String.format(Locale.current.platformLocale, "%.1f", bmi)} - $bmiCategory",
+                                detail = "Weight: ${w}${if (isMetric) "kg" else "lbs"}, Height: ${h}${if (isMetric) "cm" else "in"}",
+                                date = System.currentTimeMillis()
+                            )
+                        )
                     }
                 },
                 modifier = Modifier

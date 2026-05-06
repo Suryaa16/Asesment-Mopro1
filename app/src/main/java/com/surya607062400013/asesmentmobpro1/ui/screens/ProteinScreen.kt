@@ -22,6 +22,7 @@ import com.surya607062400013.asesmentmobpro1.R
 import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.platform.LocalLocale
+import com.surya607062400013.asesmentmobpro1.data.local.entity.HistoryEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -138,6 +139,16 @@ fun ProteinScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                         val multiplier = goalMultipliers[selectedGoal]
                         proteinMin = w * multiplier.first
                         proteinMax = w * multiplier.second
+
+                        //Simpan ke database
+                        historyViewModel.insert(
+                            HistoryEntity(
+                                type = "Protein",
+                                result = "${String.format(Locale.current.platformLocale, "%.0f", proteinMin)}-${String.format(Locale.current.platformLocale, "%.0f", proteinMax)}g/day",
+                                detail = "Weight: ${w}kg, Goal: ${goalLabels[selectedGoal]}",
+                                date = System.currentTimeMillis()
+                            )
+                        )
                     }
                 },
                 modifier = Modifier

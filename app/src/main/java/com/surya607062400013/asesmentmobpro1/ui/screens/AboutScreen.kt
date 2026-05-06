@@ -1,5 +1,6 @@
 package com.surya607062400013.asesmentmobpro1.ui.screens
 
+import android.R.id.shareText
 import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
@@ -108,7 +109,7 @@ fun AboutScreen(onNavigateUp: () -> Unit) {
                         type = "text/plain"
                         putExtra(
                             Intent.EXTRA_TEXT,
-                            context.getString(R.string.share_text)
+                            shareText
                         )
                     }
                     context.startActivity(

@@ -19,11 +19,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.content.Intent
+import androidx.compose.ui.text.intl.Locale
 import com.surya607062400013.asesmentmobpro1.R
+import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
+import androidx.compose.ui.platform.LocalLocale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalorieScreen(onNavigateUp: () -> Unit) {
+fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
     //stage input
     var age by remember { mutableStateOf("") }
     var weight by remember { mutableStateOf("") }
@@ -50,6 +53,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
     )
     val activityMultipliers = listOf(1.2, 1.375, 1.55, 1.55, 1.9)
     val context = LocalContext.current
+    val shareCalorieTemplate = stringResource(R.string.share_calorie_result)
 
     Scaffold(
         topBar = {
@@ -251,7 +255,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = String.format(java.util.Locale.getDefault(),"%.0f", calories),
+                            text = String.format(LocalLocale.current.platformLocale,"%.0f", calories),
                             fontSize = 48.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -265,8 +269,9 @@ fun CalorieScreen(onNavigateUp: () -> Unit) {
                         //Tombol share hasil
                         OutlinedButton(
                             onClick = {
-                                val shareText = context.getString(
-                                    R.string.share_calorie_result,
+                                val shareText = String.format(
+                                    Locale.current.platformLocale,
+                                    shareCalorieTemplate,
                                     calories
                                 )
                                 val intent = Intent(Intent.ACTION_SEND).apply {

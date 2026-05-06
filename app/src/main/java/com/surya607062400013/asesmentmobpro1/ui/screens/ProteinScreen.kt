@@ -19,10 +19,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.surya607062400013.asesmentmobpro1.R
+import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.platform.LocalLocale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProteinScreen(onNavigateUp: () -> Unit) {
+fun ProteinScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
 
     //State input
     var weight by remember { mutableStateOf("") }
@@ -52,6 +55,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
         Pair(2.0, 2.4)    // Atlit
     )
     val context = LocalContext.current
+    val shareProteinTemplate = stringResource(R.string.share_protein_result)
 
     Scaffold(
         topBar = {
@@ -165,7 +169,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = String.format(java.util.Locale.getDefault(),"%.0f - %.0f", proteinMin, proteinMax),
+                            text = String.format(LocalLocale.current.platformLocale,"%.0f - %.0f", proteinMin, proteinMax),
                             fontSize = 48.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -188,7 +192,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                                     fontSize = 12.sp
                                 )
                                 Text(
-                                    text = String.format(java.util.Locale.getDefault(),"%.0f g", proteinMin),
+                                    text = String.format(LocalLocale.current.platformLocale,"%.0f g", proteinMin),
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -199,7 +203,7 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                                     fontSize = 12.sp
                                 )
                                 Text(
-                                    text = String.format(java.util.Locale.getDefault(),"%.0f g", proteinMax),
+                                    text = String.format(LocalLocale.current.platformLocale,"%.0f g", proteinMax),
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -210,10 +214,13 @@ fun ProteinScreen(onNavigateUp: () -> Unit) {
                         //Tombol share hasil
                         OutlinedButton(
                             onClick = {
-                                val shareText = context.getString(
-                                    R.string.share_protein_result,
-                                    proteinMin,
-                                    proteinMax
+                                val min = proteinMin ?: 0.0
+                                val max = proteinMax ?: 0.0
+                                val shareText = String.format(
+                                    Locale.current.platformLocale,
+                                    shareProteinTemplate,
+                                    min,
+                                    max
                                 )
                                 val intent = Intent(Intent.ACTION_SEND).apply {
                                     type = "text/plain"

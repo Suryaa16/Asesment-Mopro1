@@ -42,11 +42,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
+import androidx.compose.ui.text.intl.Locale
 import com.surya607062400013.asesmentmobpro1.R
+import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
+import androidx.compose.ui.platform.LocalLocale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BmiScreen(onNavigateUp: () -> Unit) {
+fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
     //State input
     var weight by remember { mutableStateOf("") }
     var height by remember { mutableStateOf("") }
@@ -67,6 +70,7 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
     val strOverweight = stringResource(R.string.bmi_overweight)
     val strObese = stringResource(R.string.bmi_obese)
     val context = LocalContext.current
+    val shareBmiTemplate = stringResource(R.string.share_bmi_result)
 
     Scaffold(
         topBar = {
@@ -248,7 +252,7 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = String.format(java.util.Locale.getDefault(),"%.1f", bmi),
+                            text = String.format(LocalLocale.current.platformLocale,"%.1f", bmi),
                             fontSize = 48.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -262,8 +266,9 @@ fun BmiScreen(onNavigateUp: () -> Unit) {
                         //Tombol share hasil
                         OutlinedButton(
                             onClick = {
-                                val shareText = context.getString(
-                                    R.string.share_bmi_result,
+                                val shareText = String.format(
+                                    Locale.current.platformLocale,
+                                    shareBmiTemplate,
                                     bmi,
                                     bmiCategory
                                 )

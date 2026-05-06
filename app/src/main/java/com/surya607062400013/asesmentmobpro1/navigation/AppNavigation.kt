@@ -11,7 +11,12 @@ import com.surya607062400013.asesmentmobpro1.ui.screens.HomeScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.AboutScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.BmiScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.CalorieScreen
+import com.surya607062400013.asesmentmobpro1.ui.screens.HistoryDetailScreen
+import com.surya607062400013.asesmentmobpro1.ui.screens.HistoryEditScreen
+import com.surya607062400013.asesmentmobpro1.ui.screens.HistoryScreen
 import com.surya607062400013.asesmentmobpro1.ui.screens.ProteinScreen
+import com.surya607062400013.asesmentmobpro1.ui.screens.RecycleBinScreen
+import com.surya607062400013.asesmentmobpro1.ui.screens.SettingsScreen
 import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
 import com.surya607062400013.asesmentmobpro1.viewmodel.SettingsViewModel
 

@@ -51,19 +51,23 @@ fun HistoryEditScreen(
     var proteinWeight by remember { mutableStateOf("") }
     var proteinWeightError by remember { mutableStateOf("") }
     var selectedGoal by remember { mutableIntStateOf(0) }
+    var editName by remember { mutableStateOf("") }
 
     val strFemale = stringResource(R.string.calorie_female)
-    var editName by remember { mutableStateOf("") }
+    val strAnonymous = stringResource(R.string.anonymous)
 
     // Load data existing
     LaunchedEffect(id) {
         historyViewModel.getById(id) { result ->
             item = result
-            editName = result?.name ?: ""
+            editName = if (result?.name == strAnonymous || result?.name.isNullOrBlank()) { ""
+            } else {
+                result.name
+            }
             if (result != null) {
                 val parts = result.detail.split(", ")
 
-                // Fungsi pembantu untuk mengambil hanya angka dan titik dari string
+                //Fungsi pembantu untuk mengambil hanya angka dan titik dari string
                 fun extractNumeric(text: String?): String {
                     return text?.replace(Regex("[^0-9.]"), "") ?: ""
                 }
@@ -117,7 +121,6 @@ fun HistoryEditScreen(
     val strGoalMuscle = stringResource(R.string.protein_muscle)
     val strGoalAthlete = stringResource(R.string.protein_athlete)
     val strSave = stringResource(R.string.save)
-    val strAnonymous = stringResource(R.string.anonymous)
     val strUnderweight = stringResource(R.string.bmi_underweight)
     val strNormal = stringResource(R.string.bmi_normal)
     val strOverweight = stringResource(R.string.bmi_overweight)
@@ -413,6 +416,7 @@ fun HistoryEditScreen(
                                     item?.let {
                                         historyViewModel.update(
                                             it.copy(
+                                                name = editName.ifBlank { strAnonymous },
                                                 result = "${String.format(Locale.current.platformLocale, "%.0f", calories)} kcal/day",
                                                 detail = "$strAge: $a, $strWeightKg: ${w}kg, $strHeightCm: ${h}cm, ${if (isMale) strMale else strFemale}",
                                                 date = System.currentTimeMillis(),
@@ -481,6 +485,7 @@ fun HistoryEditScreen(
                                     item?.let {
                                         historyViewModel.update(
                                             it.copy(
+                                                name = editName.ifBlank { strAnonymous },
                                                 result = "${String.format(Locale.current.platformLocale, "%.0f", min)}-${String.format(Locale.current.platformLocale, "%.0f", max)}g/day",
                                                 detail = "$strProteinWeight: ${w}kg, $strGoal: ${goalLabels[selectedGoal]}",
                                                 date = System.currentTimeMillis(),

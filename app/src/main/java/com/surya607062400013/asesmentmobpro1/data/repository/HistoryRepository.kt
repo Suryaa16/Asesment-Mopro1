@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class HistoryRepository(private val dao: HistoryDao) {
     fun getAllHistory(): Flow<List<HistoryEntity>> = dao.getAllHistory()
-    fun getHistoryType(type: String): Flow<List<HistoryEntity>> = dao.getHistoryByType(type)
     fun getRecycleBin(): Flow<List<HistoryEntity>> = dao.getRecycleBin()
 
     suspend fun getById(id: Int): HistoryEntity? = dao.getById(id)

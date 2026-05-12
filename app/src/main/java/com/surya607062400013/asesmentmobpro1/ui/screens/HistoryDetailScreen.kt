@@ -1,11 +1,8 @@
 package com.surya607062400013.asesmentmobpro1.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import android.content.Intent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -13,27 +10,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -56,31 +39,58 @@ fun HistoryDetailScreen(
     var item by remember { mutableStateOf<HistoryEntity?>(null) }
     var showDeleteDialog by remember { mutableStateOf(false) }
 
-    //Load data berdasarkan id
+    //String resources
+    val strDetail = stringResource(R.string.detail)
+    val strEdit = stringResource(R.string.edit)
+    val strDelete = stringResource(R.string.delete)
+    val strDeleteConfirm = stringResource(R.string.delete_confirm)
+    val strDeleteConfirmDesc = stringResource(R.string.delete_confirm_desc)
+    val strConfirm = stringResource(R.string.confirm)
+    val strCancel = stringResource(R.string.cancel)
+    val strEdited = stringResource(R.string.edited)
+    val context = LocalContext.current
+    val shareTemplate = stringResource(R.string.share_history_result)
+
+    //Load data
     LaunchedEffect(id) {
         historyViewModel.getById(id) { result ->
             item = result
         }
     }
 
+    //Warna per type
+    val typeBorderColor = when (item?.type) {
+        "BMI" -> Color(0xFF00E5FF)
+        "Calorie" -> Color(0xFF39FF14)
+        "Protein" -> Color(0xFFBF00FF)
+        else -> Color(0xFF8888AA)
+    }
+
+    val typeColor = when (item?.type) {
+        "BMI" -> Color(0xFF00E5FF).copy(alpha = 0.15f)
+        "Calorie" -> Color(0xFF39FF14).copy(alpha = 0.15f)
+        "Protein" -> Color(0xFFBF00FF).copy(alpha = 0.15f)
+        else -> Color(0xFF8888AA).copy(alpha = 0.15f)
+    }
+
     //Dialog konfirmasi hapus
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text(stringResource(R.string.delete_confirm)) },
-            text = { Text(stringResource(R.string.delete_confirm_desc)) },
+            title = { Text(strDeleteConfirm) },
+            text = { Text(strDeleteConfirmDesc) },
             confirmButton = {
                 TextButton(onClick = {
                     historyViewModel.softDelete(id)
                     showDeleteDialog = false
                     onNavigateUp()
                 }) {
-                    Text(stringResource(R.string.confirm), color = MaterialTheme.colorScheme.error)
+                    Text(strConfirm, color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(strCancel)
                 }
             }
         )
@@ -89,9 +99,9 @@ fun HistoryDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.detail)) },
+                title = { Text(strDetail) },
                 navigationIcon = {
-                    IconButton( onClick = onNavigateUp) {
+                    IconButton(onClick = onNavigateUp) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back"
@@ -99,18 +109,39 @@ fun HistoryDetailScreen(
                     }
                 },
                 actions = {
-                    //Tombol edit
+                    IconButton(
+                        onClick = {
+                            item?.let { data ->
+                                val shareText = String.format(
+                                    Locale.getDefault(),
+                                    shareTemplate,
+                                    data.name.ifBlank { "Someone" },
+                                    data.type,
+                                    data.result
+                                )
+                                val intent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_TEXT, shareText)
+                                }
+                                context.startActivity(Intent.createChooser(intent, "Share via"))
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Share,
+                            contentDescription = stringResource(R.string.menu_share)
+                        )
+                    }
                     IconButton(onClick = onNavigateToEdit) {
                         Icon(
                             imageVector = Icons.Default.Edit,
-                            contentDescription = "Edit"
+                            contentDescription = strEdit
                         )
                     }
-                    //Tombol delete
                     IconButton(onClick = { showDeleteDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = strDelete,
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -122,40 +153,92 @@ fun HistoryDetailScreen(
             val dateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
             val dateStr = dateFormat.format(Date(data.date))
 
-            val typeColor = when (data.type) {
-                "BMI" -> Color(0xFF90CAF9)
-                "Calorie" -> Color(0xFFA5D6A7)
-                "Protein" -> Color(0xFFCE93D8)
-                else -> Color(0xFFE0E0E0)
-            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
                     .verticalScroll(rememberScrollState())
                     .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                //Tipe badge
-                Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = typeColor
+                //Badge
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = data.type,
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
-                    )
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = typeColor,
+                        border = BorderStroke(
+                            1.dp, typeBorderColor
+                        )
+                    ) {
+                        Text(
+                            text = data.type,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = typeBorderColor
+                        )
+                    }
+                    if (data.isEdited) {
+                        Surface(
+                            shape = RoundedCornerShape(4.dp),
+                            color = MaterialTheme.colorScheme.tertiary
+                        ) {
+                            Text(
+                                text = strEdited,
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                fontSize = 10.sp,
+                                color = MaterialTheme.colorScheme.onTertiary
+                            )
+                        }
+                    }
                 }
-
-                //Card hasil
-                Card(modifier = Modifier.fillMaxWidth()) {
+                //Nama
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
+                    border = BorderStroke(
+                        1.dp, MaterialTheme.colorScheme.outline
+                    )
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Name",
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = data.name.ifBlank { stringResource(R.string.anonymous) },
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+                //Card Hasil
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
+                    border = BorderStroke(
+                        1.dp, typeBorderColor.copy(alpha = 0.5f)
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
                             text = "Result",
@@ -164,19 +247,28 @@ fun HistoryDetailScreen(
                         )
                         Text(
                             text = data.result,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = typeBorderColor
                         )
                     }
                 }
 
-                //Card detail input
-                Card(modifier = Modifier.fillMaxWidth()) {
+                //Card Detail Input
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
+                    border = BorderStroke(
+                        1.dp, MaterialTheme.colorScheme.outline
+                    )
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
                             text = "Input Detail",
@@ -185,18 +277,27 @@ fun HistoryDetailScreen(
                         )
                         Text(
                             text = data.detail,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
 
-                //Card tanggal
-                Card(modifier = Modifier.fillMaxWidth()) {
+                //Card Tanggal
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
+                    border = BorderStroke(
+                        1.dp, MaterialTheme.colorScheme.outline
+                    )
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
                             text = "Date",
@@ -205,13 +306,16 @@ fun HistoryDetailScreen(
                         )
                         Text(
                             text = dateStr,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
             }
         } ?: run {
-            //Loading state
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center

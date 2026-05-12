@@ -1,7 +1,7 @@
 package com.surya607062400013.asesmentmobpro1.ui.screens
 
-import android.R.id.shareText
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -30,13 +31,13 @@ fun HomeScreen(
     onNavigateToCalorie: () -> Unit,
     onNavigateToProtein: () -> Unit,
     onNavigateToAbout: () -> Unit,
-    onNavigateToHistory: () -> Unit,
-    onNavigateToSettings: () -> Unit
+    onNavigateToSettings: () -> Unit,
+    rootPadding: PaddingValues
 ) {
     val context = LocalContext.current
     var showMenu by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
-
+    val shareText = stringResource(R.string.share_text)
     Scaffold(
         topBar = {
             TopAppBar(
@@ -75,13 +76,6 @@ fun HomeScreen(
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("History") },
-                            onClick = {
-                                showMenu = false
-                                onNavigateToHistory()
-                            }
-                        )
-                        DropdownMenuItem(
                             text = { Text("Settings") },
                             onClick = {
                                 showMenu = false
@@ -92,18 +86,21 @@ fun HomeScreen(
                 }
             )
         }
-    ) { paddingValues ->
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = rootPadding.calculateBottomPadding()
+                )
                 .verticalScroll(scrollState)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             //gambar Banner
             Image(
-                painter = painterResource(id = R.drawable.banner1),
+                painter = painterResource(id = R.drawable.banner3),
                 contentDescription = "Banner",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -135,11 +132,18 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
+                border = BorderStroke(
+                    1.dp, Color(0xFF00E5FF)
+                )
             ) {
                 Text(
                     text = stringResource(R.string.btn_bmi),
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color(0xFF00E5FF)
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -150,11 +154,18 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
+                border = BorderStroke(
+                    1.dp, Color(0xFF39FF14)
+                )
             ) {
                 Text(
                     text = stringResource(R.string.btn_calorie),
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color(0xFF39FF14)
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -165,13 +176,21 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
+                border = BorderStroke(
+                    1.dp, Color(0xFFBF00FF)
+                )
             ) {
                 Text(
                     text = stringResource(R.string.btn_protein),
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color(0xFFBF00FF)
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

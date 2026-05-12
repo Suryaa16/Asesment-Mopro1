@@ -1,7 +1,5 @@
 package com.surya607062400013.asesmentmobpro1.ui.screens
 
-import android.R.id.shareText
-import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.rememberScrollState
@@ -102,30 +100,6 @@ fun AboutScreen(onNavigateUp: () -> Unit) {
             }
             Spacer(modifier = Modifier.height(8.dp))
 
-            //Tombol share
-            OutlinedButton(
-                onClick = {
-                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                        type = "text/plain"
-                        putExtra(
-                            Intent.EXTRA_TEXT,
-                            shareText
-                        )
-                    }
-                    context.startActivity(
-                        Intent.createChooser(shareIntent, "Share via")
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.about_share),
-                    fontSize = 16.sp
-                )
-            }
         }
     }
 }

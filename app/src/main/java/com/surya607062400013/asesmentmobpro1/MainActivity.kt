@@ -4,40 +4,28 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.surya607062400013.asesmentmobpro1.navigation.AppNavigation
-import com.surya607062400013.asesmentmobpro1.ui.theme.AsesmentMOBPRO1Theme
+import com.surya607062400013.asesmentmobpro1.ui.theme.FitCallTheme
+import com.surya607062400013.asesmentmobpro1.viewmodel.SettingsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AsesmentMOBPRO1Theme {
+            val settingsViewModel: SettingsViewModel = viewModel()
+            val isDarkMode by  settingsViewModel.isDarkMode.collectAsStateWithLifecycle(false)
+            val themeColor by settingsViewModel.themeColor.collectAsStateWithLifecycle("Purple")
+
+            FitCallTheme(
+                darkTheme = isDarkMode,
+                themeColor = themeColor
+            ) {
                 AppNavigation()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AsesmentMOBPRO1Theme {
-        Greeting("Android")
     }
 }

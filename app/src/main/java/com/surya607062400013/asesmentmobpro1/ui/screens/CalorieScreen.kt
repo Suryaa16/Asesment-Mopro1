@@ -19,10 +19,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.ui.text.intl.Locale
 import com.surya607062400013.asesmentmobpro1.R
 import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
-import androidx.compose.ui.platform.LocalLocale
 import com.surya607062400013.asesmentmobpro1.data.local.entity.HistoryEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,11 +34,13 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
     var height by remember { mutableStateOf("") }
     var isMale by remember { mutableStateOf(true) }
     var selectedActivity by remember { mutableIntStateOf(0) }
+    var name by remember { mutableStateOf("") }
 
     //state error
     var ageError by remember { mutableStateOf("") }
     var weightError by remember { mutableStateOf("") }
     var heightError by remember { mutableStateOf("") }
+    var isSaved by remember { mutableStateOf(false) }
 
     //state hasil
     var calorieResult by remember {mutableStateOf<Double?>(null)}
@@ -55,6 +57,13 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
     val activityMultipliers = listOf(1.2, 1.375, 1.55, 1.55, 1.9)
     val context = LocalContext.current
     val shareCalorieTemplate = stringResource(R.string.share_calorie_result)
+    val strAgeLabel = stringResource(R.string.calorie_age)
+    val strWeightLabel = stringResource(R.string.calorie_weight_kg)
+    val strHeightLabel = stringResource(R.string.calorie_height_cm)
+    val strMaleLabel = stringResource(R.string.calorie_male)
+    val strFemaleLabel = stringResource(R.string.calorie_female)
+    val strInputName = stringResource(R.string.input_name)
+    val strAnonymous = stringResource(R.string.anonymous)
 
     Scaffold(
         topBar = {
@@ -79,12 +88,21 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            //Input nama
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text(strInputName) },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
+            )
             //input Usia
             OutlinedTextField(
                 value = age,
                 onValueChange = {
                     age = it
                     ageError = ""
+                    isSaved = false
                 },
                 label = { Text(stringResource(R.string.calorie_age)) },
                 isError = ageError.isNotEmpty(),
@@ -102,6 +120,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                 onValueChange = {
                     weight = it
                     weightError = ""
+                    isSaved = false
                 },
                 label = { Text(stringResource(R.string.calorie_weight_kg)) },
                 isError = weightError.isNotEmpty(),
@@ -119,6 +138,7 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                 onValueChange = {
                     height = it
                     heightError = ""
+                    isSaved = false
                 },
                 label = { Text(stringResource(R.string.calorie_height_cm)) },
                 isError = heightError.isNotEmpty(),
@@ -228,19 +248,33 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                         calorieResult = bmr * activityMultipliers[selectedActivity]
 
                         //Simpan ke database
-                        historyViewModel.insert(
-                            HistoryEntity(
-                                type = "Calorie",
-                                result = "${String.format(Locale.current.platformLocale, "%.0f", calorieResult)} kcal/day",
-                                detail = "Age: $a, Weight: ${w}kg, Height: ${h}cm, ${if (isMale) "Male" else "Female"}",
-                                date = System.currentTimeMillis()
+                        if (!isSaved) {
+                            historyViewModel.insert(
+                                HistoryEntity(
+                                    name = name.ifBlank { strAnonymous },
+                                    type = "Calorie",
+                                    result = "${
+                                        String.format(
+                                            Locale.current.platformLocale,
+                                            "%.0f",
+                                            calorieResult
+                                        )
+                                    } kcal/day",
+                                    detail = "$strAgeLabel: $a, $strWeightLabel: ${w}kg, $strHeightLabel: ${h}cm, ${if (isMale) strMaleLabel else strFemaleLabel}",
+                                    date = System.currentTimeMillis()
+                                )
                             )
-                        )
+                        }
+                        isSaved = true
                     }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(52.dp)
+                    .height(52.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
             ) {
                 Text(stringResource(R.string.calorie_calculate), fontSize = 16.sp)
             }
@@ -251,30 +285,38 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFA5D6A7)
+                        containerColor = Color(0xFF0D0D1A)
+                    ),
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = Color(0xFF00E5FF)  // cyan neon
                     )
                 ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(20.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
                             text = stringResource(R.string.calorie_result),
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium
+                            color = Color.White
                         )
                         Text(
-                            text = String.format(LocalLocale.current.platformLocale,"%.0f", calories),
-                            fontSize = 48.sp,
-                            fontWeight = FontWeight.Bold
+                            text = String.format(Locale.current.platformLocale, "%.0f", calories),
+                            fontSize = 56.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF00E5FF)
                         )
                         Text(
                             text = stringResource(R.string.calorie_kcal),
                             fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.White
                         )
+
                         Spacer(modifier = Modifier.height(4.dp))
 
                         //Tombol share hasil
@@ -291,9 +333,13 @@ fun CalorieScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) 
                                 }
                                 context.startActivity(Intent.createChooser(intent, "Share via"))
                             },
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            border = BorderStroke(
+                                1.dp, Color(0xFF00E5FF)
+                            )
                         ) {
-                            Text(stringResource(R.string.menu_share))
+                            Text(stringResource(R.string.menu_share_result),color = Color(0xFF00E5FF),
+                                fontWeight = FontWeight.Medium)
                         }
                     }
                 }

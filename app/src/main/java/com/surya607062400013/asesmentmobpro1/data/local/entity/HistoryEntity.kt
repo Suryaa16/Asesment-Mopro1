@@ -7,9 +7,11 @@ import androidx.room.PrimaryKey
 data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val name: String = "",
     val type: String,
     val result: String,
     val detail: String,
     val date: Long,
-    val isDeleted: Boolean = false
+    val isDeleted: Boolean = false,
+    val isEdited: Boolean = false
 )

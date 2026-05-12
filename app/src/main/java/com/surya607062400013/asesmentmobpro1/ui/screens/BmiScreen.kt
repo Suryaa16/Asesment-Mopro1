@@ -42,10 +42,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.text.intl.Locale
 import com.surya607062400013.asesmentmobpro1.R
 import com.surya607062400013.asesmentmobpro1.viewmodel.HistoryViewModel
-import androidx.compose.ui.platform.LocalLocale
 import com.surya607062400013.asesmentmobpro1.data.local.entity.HistoryEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,6 +56,7 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
     var weight by remember { mutableStateOf("") }
     var height by remember { mutableStateOf("") }
     var isMetric by remember { mutableStateOf(true) }
+    var name by remember { mutableStateOf("") }
 
     //State error
     var weightError by remember { mutableStateOf("") }
@@ -63,6 +65,7 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
     //State hasil
     var bmiResult by remember { mutableStateOf<Double?>(null) }
     var bmiCategory by remember { mutableStateOf("") }
+    var isSaved by remember { mutableStateOf(false) }
 
     //Mengambil string dari strings.xml agar bisa multibahasa
     val scrollState = rememberScrollState()
@@ -72,6 +75,10 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
     val strObese = stringResource(R.string.bmi_obese)
     val context = LocalContext.current
     val shareBmiTemplate = stringResource(R.string.share_bmi_result)
+    val strWeightLabel = stringResource(R.string.bmi_weight)
+    val strHeightLabel = stringResource(R.string.bmi_height)
+    val strInputName = stringResource(R.string.input_name)
+    val strAnonymous = stringResource(R.string.anonymous)
 
     Scaffold(
         topBar = {
@@ -109,6 +116,7 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                         weight = ""
                         height = ""
                         bmiResult = null
+                        isSaved = false
                     }
                 )
                 Text(stringResource(R.string.bmi_metric))
@@ -125,13 +133,21 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                 )
                 Text(stringResource(R.string.bmi_imperial))
             }
-
+            //Input nama
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text(strInputName) },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
+            )
             //Input berat
             OutlinedTextField(
                 value = weight,
                 onValueChange = {
                     weight = it
                     weightError = ""
+                    isSaved = false
                 },
                 label = {
                     Text(
@@ -154,6 +170,7 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                 onValueChange = {
                     height = it
                     heigthError = ""
+                    isSaved = false
                 },
                 label = {
                     Text(
@@ -207,10 +224,10 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                             val hMeters = h / 100.0
                             w / (hMeters * hMeters)
                         } else {
-                            703 * w / (h * h) //untuk imperial 703 x berat badan : (tinggi badan)²
+                            703 * w / (h * h)
                         }
-                        bmiResult = bmi
 
+                        bmiResult = bmi
                         //Kategori
                         bmiCategory = when {
                             bmi < 18.5 -> strUnderweight
@@ -220,19 +237,33 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                         }
 
                         //Simpan ke database
-                        historyViewModel.insert(
-                            HistoryEntity(
-                                type = "BMI",
-                                result = "BMI: ${String.format(Locale.current.platformLocale, "%.1f", bmi)} - $bmiCategory",
-                                detail = "Weight: ${w}${if (isMetric) "kg" else "lbs"}, Height: ${h}${if (isMetric) "cm" else "in"}",
-                                date = System.currentTimeMillis()
+                        if (!isSaved) {
+                            historyViewModel.insert(
+                                HistoryEntity(
+                                    name = name.ifBlank { strAnonymous },
+                                    type = "BMI",
+                                    result = "BMI: ${
+                                        String.format(
+                                            Locale.current.platformLocale,
+                                            "%.1f",
+                                            bmi
+                                        )
+                                    } - $bmiCategory",
+                                    detail = "$strWeightLabel: ${w}${if (isMetric) "kg" else "lbs"}, $strHeightLabel: ${h}${if (isMetric) "cm" else "in"}, Unit: ${if (isMetric) "Metric" else "Imperial"}",
+                                    date = System.currentTimeMillis()
+                                )
                             )
-                        )
+                        }
+                        isSaved = true
                     }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(52.dp)
+                    .height(52.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
             ) {
                 Text(stringResource(R.string.bmi_calculate), fontSize = 16.sp)
             }
@@ -243,11 +274,15 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
-                        containerColor = when (bmiCategory) {
-                            "Underweight" -> Color(0xFF90CAF9)
-                            "Normal" -> Color(0xFFA5D6A7)
-                            "Overweight" -> Color(0xFFFFCC80)
-                            else -> Color(0xFFEF9A9A)
+                        containerColor = Color(0xFF0D0D1A)
+                    ),
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = when {
+                            bmi < 18.5 -> Color(0xFF00E5FF)
+                            bmi < 25.0 -> Color(0xFF39FF14)
+                            bmi < 30.0 -> Color(0xFFFFD600)
+                            else -> Color(0xFFFF1744)
                         }
                     )
                 ) {
@@ -255,23 +290,32 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(20.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
                             text = stringResource(R.string.bmi_result),
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium
+                            color = Color.White
                         )
                         Text(
-                            text = String.format(LocalLocale.current.platformLocale,"%.1f", bmi),
-                            fontSize = 48.sp,
-                            fontWeight = FontWeight.Bold
+                            text = String.format(Locale.current.platformLocale, "%.1f", bmi),
+                            fontSize = 56.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = when {
+                                bmi < 18.5 -> Color(0xFF00E5FF)
+                                bmi < 25.0 -> Color(0xFF39FF14)
+                                bmi < 30.0 -> Color(0xFFFFD600)
+                                else -> Color(0xFFFF1744)
+                            }
                         )
                         Text(
                             text = bmiCategory,
                             fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.White
                         )
+
                         Spacer(modifier = Modifier.height(4.dp))
 
                         //Tombol share hasil
@@ -289,9 +333,25 @@ fun BmiScreen(onNavigateUp: () -> Unit, historyViewModel: HistoryViewModel) {
                                 }
                                 context.startActivity(Intent.createChooser(intent, "Share via"))
                             },
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            border = BorderStroke(
+                                1.dp, when {
+                                    bmi < 18.5 -> Color(0xFF00E5FF)
+                                    bmi < 25.0 -> Color(0xFF39FF14)
+                                    bmi < 30.0 -> Color(0xFFFFD600)
+                                    else -> Color(0xFFFF1744)
+                                }
+                            )
                         ) {
-                            Text(stringResource(R.string.menu_share))
+                            Text(
+                                text = stringResource(R.string.menu_share),
+                                color = when {
+                                    bmi < 18.5 -> Color(0xFF00E5FF)
+                                    bmi < 25.0 -> Color(0xFF39FF14)
+                                    bmi < 30.0 -> Color(0xFFFFD600)
+                                    else -> Color(0xFFFF1744)
+                                }
+                            )
                         }
                     }
                 }

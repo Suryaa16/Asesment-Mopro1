@@ -5,8 +5,8 @@ import com.surya607062400013.asesmentmobpro1.data.local.entity.HistoryEntity
 import kotlinx.coroutines.flow.Flow
 
 class HistoryRepository(private val dao: HistoryDao) {
-    fun getAllHistory(): Flow<List<HistoryEntity>> = dao.getAllHistory()
-    fun getRecycleBin(): Flow<List<HistoryEntity>> = dao.getRecycleBin()
+    fun getAllHistory(googleId: String): Flow<List<HistoryEntity>> = dao.getAllHistory(googleId)
+    fun getRecycleBin(googleId: String): Flow<List<HistoryEntity>> = dao.getRecycleBin(googleId)
 
     suspend fun getById(id: Int): HistoryEntity? = dao.getById(id)
     suspend fun insert(history: HistoryEntity) = dao.insert(history)

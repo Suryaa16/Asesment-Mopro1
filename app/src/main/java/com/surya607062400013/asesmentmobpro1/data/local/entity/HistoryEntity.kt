@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val googleId: String = "",
     val name: String = "",
     val type: String,
     val result: String,

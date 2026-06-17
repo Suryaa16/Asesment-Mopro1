@@ -16,16 +16,16 @@ interface HistoryDao {
     suspend fun insert(history: HistoryEntity)
 
     //Get semua history yang belum dihapus
-    @Query("SELECT * FROM history WHERE isDeleted = 0 ORDER BY date DESC")
-    fun getAllHistory(): Flow<List<HistoryEntity>>
+    @Query("SELECT * FROM history WHERE isDeleted = 0 AND googleId = :googleId ORDER BY date DESC")
+    fun getAllHistory(googleId: String): Flow<List<HistoryEntity>>
 
     //Get history berdasarkan type
-    @Query("SELECT * FROM history WHERE isDeleted = 0 AND type = :type ORDER BY date DESC")
-    fun getHistoryByType(type: String): Flow<List<HistoryEntity>>
+    @Query("SELECT * FROM history WHERE isDeleted = 0 AND type = :type AND googleId = :googleId ORDER BY date DESC")
+    fun getHistoryByType(type: String, googleId: String): Flow<List<HistoryEntity>>
 
     //Get recycle bin
-    @Query("SELECT * FROM history WHERE isDeleted = 1 ORDER BY date DESC")
-    fun getRecycleBin(): Flow<List<HistoryEntity>>
+    @Query("SELECT * FROM history WHERE isDeleted = 1 AND googleId = :googleId ORDER BY date DESC")
+    fun getRecycleBin(googleId: String): Flow<List<HistoryEntity>>
 
     //Get by id untuk detail atau edit
     @Query("SELECT * FROM history WHERE id = :id")

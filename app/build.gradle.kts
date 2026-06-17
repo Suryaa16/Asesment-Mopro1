@@ -60,6 +60,18 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     // Coil
     implementation(libs.coil.compose)
+    // Credential Manager (Google Sign-In)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services)
+    implementation(libs.google.googleid)
+    // Retrofit & Moshi (REST API)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.okhttp.logging)
+    // Image Cropper
+    implementation(libs.canhub.image.cropper)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

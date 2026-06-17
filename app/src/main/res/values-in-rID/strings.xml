@@ -59,7 +59,7 @@
     <string name="about_title">Tentang</string>
     <string name="about_app_name">FitCall</string>
     <string name="about_version">Versi 1.1.0</string>
-    <string name="about_description">FitCall adalah aplikasi kalkulator kebugaran sederhana yang membantu Anda memantau BMI,kebutuhan kalori harian, dan kebutuhan protein harian. Tetap sehat dan bugar!</string>
+    <string name="about_description">FitCall adalah aplikasi kebugaran komprehensif yang membantu Anda memantau BMI, kebutuhan kalori dan protein harian, serta dilengkapi fitur Buku Harian Makanan (Meal Diary) untuk mencatat asupan makanan Anda. Tetap sehat dan bugar!</string>
     <string name="about_developer">Pengembang</string>
     <string name="about_developer_name">Surya</string>
     <string name="about_share">Bagikan App</string>
@@ -120,4 +120,58 @@
 
     <string name="input_name">Nama (opsional)</string>
     <string name="anonymous">Anonim</string>
+
+    <!-- Login Screen -->
+    <string name="login_google">Masuk dengan Google</string>
+    <string name="login_loading">Sedang masuk…</string>
+    <string name="login_info">Masuk untuk menyinkronkan data Anda di berbagai perangkat</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_photo_desc">Foto Profil</string>
+    <string name="profile_name_label">Nama</string>
+    <string name="profile_email_label">Email</string>
+    <string name="bottom_nav_profile">Profil</string>
+
+    <!-- Logout -->
+    <string name="logout">Keluar</string>
+    <string name="logout_confirm_title">Keluar?</string>
+    <string name="logout_confirm_desc">Yakin ingin keluar dari akun ini?</string>
+
+    <!-- Meal Diary -->
+    <string name="bottom_nav_meal_diary">Makanan</string>
+    <string name="add_meal">Tambah Makanan</string>
+    <string name="edit_meal">Edit Makanan</string>
+    <string name="delete_confirm_meal_desc">Makanan ini akan dihapus dari catatan Anda.</string>
+    <string name="error_process_credential">Gagal memproses kredensial: %1$s</string>
+    <string name="error_unknown_credential">Jenis kredensial tidak dikenali</string>
+    <string name="error_add_meal_offline">Gagal menambah makanan ke server, disimpan offline: %1$s</string>
+    <string name="error_update_meal_offline">Gagal mengupdate makanan ke server, diupdate offline.</string>
+    <string name="error_delete_meal_offline">Gagal menghapus makanan di server, dihapus offline.</string>
+    <string name="login_welcome">Selamat datang di FitCall</string>
+    <string name="login_subtitle">Masuk untuk melanjutkan</string>
+    <string name="login_or">Atau</string>
+    <string name="login_continue_guest">Lanjutkan tanpa Masuk</string>
+    <string name="add_new_meal">Tambah Makanan Baru</string>
+    <string name="meal_name">Nama Makanan</string>
+    <string name="meal_description">Deskripsi</string>
+    <string name="meal_calories">Kalori</string>
+    <string name="save_meal">Simpan Makanan</string>
+    <string name="delete_meal_btn">Hapus Makanan</string>
+    <string name="take_choose_photo">Ambil/Pilih Foto</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="choose_image_source">Pilih Sumber Gambar</string>
+    <string name="error_fill_name_calories">Harap isi nama dan kalori</string>
+    <string name="empty_meal_diary">Belum ada makanan hari ini. Ayo tambahkan!</string>
+    <string name="need_online_for_images">Anda harus online setidaknya sekali untuk melihat gambar Anda.</string>
+    <string name="offline_image_desc">Gambar Offline</string>
+    <string name="meal_not_synced">Menunggu sinkronisasi…</string>
+    <string name="meal_preparing_image">Menyiapkan gambar…</string>
+    <string name="meal_share_text">Saya makan %1$s hari ini! (%2$d kkal)\n%3$s</string>
+    <string name="meal_share_title">Bagikan Makanan</string>
+    <string name="meal_broken_image">Gambar Rusak (Offline)</string>
+    <string name="meal_no_records">Belum ada makanan yang dicatat</string>
+    <string name="error_field_required">Kolom ini harus diisi</string>
+    <string name="error_invalid_calories">Kalori tidak valid</string>
 </resources>

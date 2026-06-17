@@ -58,7 +58,7 @@
     <string name="about_title">About</string>
     <string name="about_app_name">FitCall</string>
     <string name="about_version">Version 1.1.0</string>
-    <string name="about_description">FitCall is a simple fitness calculator app that helps you track your BMI, daily calorie needs, and daily protein needs. Good for Health, Bad for Education!</string>
+    <string name="about_description">FitCall is a comprehensive fitness app that helps you track your BMI, daily calorie and protein needs, and features a Meal Diary to log your daily food intake. Good for Health, Bad for Education!</string>
     <string name="about_developer">Developer</string>
     <string name="about_developer_name">Surya</string>
     <string name="about_share">Share App</string>
@@ -119,4 +119,58 @@
 
     <string name="input_name">Name (optional)</string>
     <string name="anonymous">Anonymous</string>
+
+    <!-- Login Screen -->
+    <string name="login_google">Sign in with Google</string>
+    <string name="login_loading">Signing in…</string>
+    <string name="login_info">Sign in to sync your data across devices</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_photo_desc">Profile Photo</string>
+    <string name="profile_name_label">Name</string>
+    <string name="profile_email_label">Email</string>
+    <string name="bottom_nav_profile">Profile</string>
+
+    <!-- Logout -->
+    <string name="logout">Logout</string>
+    <string name="logout_confirm_title">Logout?</string>
+    <string name="logout_confirm_desc">Are you sure you want to logout from this account?</string>
+
+    <!-- Meal Diary -->
+    <string name="bottom_nav_meal_diary">Meals</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="edit_meal">Edit Meal</string>
+    <string name="delete_confirm_meal_desc">This meal will be deleted from your diary.</string>
+    <string name="error_process_credential">Failed to process credential: %1$s</string>
+    <string name="error_unknown_credential">Unknown credential type</string>
+    <string name="error_add_meal_offline">Failed to add meal to server, saved offline: %1$s</string>
+    <string name="error_update_meal_offline">Failed to update meal to server, updated offline.</string>
+    <string name="error_delete_meal_offline">Failed to delete meal on server, deleted offline.</string>
+    <string name="login_welcome">Welcome to FitCall</string>
+    <string name="login_subtitle">Log in to continue</string>
+    <string name="login_or">Or</string>
+    <string name="login_continue_guest">Continue without Login</string>
+    <string name="add_new_meal">Add New Meal</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="meal_description">Description</string>
+    <string name="meal_calories">Calories</string>
+    <string name="save_meal">Save Meal</string>
+    <string name="delete_meal_btn">Delete Meal</string>
+    <string name="take_choose_photo">Take/Choose Photo</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="choose_image_source">Choose Image Source</string>
+    <string name="error_fill_name_calories">Please fill name and calories</string>
+    <string name="empty_meal_diary">No meals today. Let\'s add some!</string>
+    <string name="need_online_for_images">You need to be online at least once to view your images.</string>
+    <string name="offline_image_desc">Offline Image</string>
+    <string name="meal_not_synced">Waiting for sync…</string>
+    <string name="meal_preparing_image">Preparing image…</string>
+    <string name="meal_share_text">I ate %1$s today! (%2$d kcal)\n%3$s</string>
+    <string name="meal_share_title">Share Meal</string>
+    <string name="meal_broken_image">Broken Image (Offline)</string>
+    <string name="meal_no_records">No meals recorded yet</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_calories">Invalid calories</string>
 </resources>
